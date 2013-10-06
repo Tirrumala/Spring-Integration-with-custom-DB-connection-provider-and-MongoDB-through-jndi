@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:security="http://www.springframework.org/schema/security"
+	xmlns:task="http://www.springframework.org/schema/task"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+        classpath:spring-beans-3.1.xsd
+        http://www.springframework.org/schema/context
+        classpath:spring-context-3.1.xsd
+        http://www.springframework.org/schema/tx
+        classpath:spring-tx-3.1.xsd
+        http://www.springframework.org/schema/aop
+        classpath:spring-aop-3.1.xsd
+        http://www.springframework.org/schema/mvc
+        classpath:spring-mvc-3.1.xsd
+        http://www.springframework.org/schema/security
+        classpath:spring-security-3.1.xsd
+        http://www.springframework.org/schema/task 
+        classpath:spring-task-3.0.xsd">
+
+	<!-- Property files -->
+	<bean id="hibernatePropertyPlaceholderConfigurer"
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="ignoreUnresolvablePlaceholders" value="true" />
+		<property name="locations">
+			<list>
+				<value>classpath:/properties/springdao/hibernate.properties
+				</value>
+			</list>
+		</property>
+	</bean>
+
+<!-- Session Factory Declaration -->
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+		<property name="packagesToScan">
+			<array>
+				<value>com.opensource</value>
+			</array>
+		</property>
+
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">${hibernate.dialect}</prop>
+				<prop key="hibernate.show_sql">${hibernate.show.sql}</prop>
+				<prop key="hibernate.current_session_context_class">${hibernate.current_session_context_class}</prop>
+				<prop key="hibernate.connection.provider_class">${hibernate.connection.provider_class}</prop>
+			</props>
+		</property>
+	</bean>
+
+<!-- Enable the configuration of transactional behavior based on annotations -->
+	<tx:annotation-driven transaction-manager="txManager"
+		proxy-target-class="true" />
+
+	<!-- Transaction Manager is defined -->
+	<bean id="txManager"
+		class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	
+</beans>

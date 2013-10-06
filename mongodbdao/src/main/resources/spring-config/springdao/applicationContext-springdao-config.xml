@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:security="http://www.springframework.org/schema/security"
+	xmlns:task="http://www.springframework.org/schema/task" xmlns:mongo="http://www.springframework.org/schema/data/mongo"
+	xmlns:jee="http://www.springframework.org/schema/jee"
+
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+        classpath:spring-beans-3.1.xsd
+        http://www.springframework.org/schema/context
+        classpath:spring-context-3.1.xsd
+        http://www.springframework.org/schema/tx
+        classpath:spring-tx-3.1.xsd
+        http://www.springframework.org/schema/aop
+        classpath:spring-aop-3.1.xsd
+        http://www.springframework.org/schema/mvc
+        classpath:spring-mvc-3.1.xsd
+        http://www.springframework.org/schema/security
+        classpath:spring-security-3.1.xsd
+        http://www.springframework.org/schema/task 
+        classpath:spring-task-3.0.xsd
+        http://www.springframework.org/schema/data/mongo
+        classpath:spring-mongo-1.1.xsd
+        http://www.springframework.org/schema/jee
+        classpath:spring-jee-3.1.xsd">
+
+	<!-- Activates annotation-based bean configuration -->
+	<context:annotation-config />
+	<context:component-scan base-package="com.opensource" />
+
+	<jee:jndi-lookup id="mongoTemplate" jndi-name="java:/comp/env/jndi/MongoDB"
+		expected-type="org.springframework.data.mongodb.core.MongoTemplate" />
+
+</beans>

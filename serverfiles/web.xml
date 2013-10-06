@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE web-app PUBLIC "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN" "http://java.sun.com/dtd/web-app_2_3.dtd">
+
+<web-app>
+
+<context-param>
+<param-name>contextConfigLocation</param-name>
+<param-value>classpath*:/spring-config/*/applicationContext-*-config.xml</param-value>
+</context-param>
+
+<listener>
+<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+</listener>
+
+
+<resource-env-ref>
+    <description>Mongo JNDI configuration</description>
+    <resource-env-ref-name>jndi/MongoDB</resource-env-ref-name>
+    <resource-env-ref-type>org.springframework.data.mongodb.core.MongoTemplate</resource-env-ref-type>
+</resource-env-ref>
+
+</web-app>
+
